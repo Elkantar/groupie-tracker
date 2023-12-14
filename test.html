@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"  href="/assetCss/Test.css" />
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet' >
+
+<head>
+
+   <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>-->
+
+
+  <title>
+      GROUPIE TRACKER
+  </title>
+  
+</head>
+
+ <body>
+    <nav>
+        <div class="sidebar">
+            <div class="logo_content">
+                <div class="logo">
+                    <i class='bx bx-cool'></i>               
+                    <div class="logo_name">CAPITAL DEL PARAISO</div>
+                </div>
+                <i class='bx bx-menu' id="btn"></i>
+        </div>
+          
+
+            <ul class="nav_list">
+                <li>
+                        <i class='bx bx-search-alt' ></i>
+                        <form method="POST">
+                            <input name="TXToptions" type="text" onkeyup="search_animal()" placeholder="search daze ?">
+                            <span class="tooltip">Yare Yare</span>  
+                        </form>
+                </li>
+                <br>
+                <br>
+                <li>
+                    <a href="/">
+                        <i class='bx bx-grid-alt' ></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span> 
+                </li>
+                <li>
+                    <a href="Date">
+                        <i class='bx bxs-hourglass' ></i>
+                        <span class="links_name">Dates</span>
+                    </a>
+                    <span class="tooltip">Dates</span> 
+                </li>
+                <li>
+                    <a href="/Locate">
+                        <i class='bx bx-buildings'></i>
+                        <span class="links_name">Locations</span>
+                    </a>
+                    <span class="tooltip">Locations</span> 
+                </li>
+                <li>
+                    <a href="Contact">
+                        <i class='bx bx-phone'></i>
+                        <span class="links_name">Contact</span>
+                    </a>
+                    <span class="tooltip">Contact</span> 
+                </li>
+            </ul>
+        </nav>
+            <script>
+                let btn = document.querySelector("#btn");
+                let sidebar = document.querySelector(".sidebar");
+
+                let searchBtn = document.querySelector(".bx-search");
+    
+                btn.onclick = function() {
+                    sidebar.classList.toggle("active");
+                }
+                searchBtn.onclick = function() {
+                    sidebar.classList.toggle("active");
+                }
+
+                function toggleSidebar() {
+                    // sidebar = document.getElementById("sidebar")
+                    // sidebar.style.width == "78px"
+                   if (/*si ouvert*/sidebar.style.width =="78px") {
+                        sidebar.style.width =="240px"
+                        // On ferme
+                        // Ajustement de la taille
+                        // Disparition des textes (display:none;)
+                   } else {
+                        sidebar.style.width =="78px"
+                        //On ouvre
+                        // Ajustemernt de la taille
+                        // Réapparition des textes (display:inline;)
+                   }
+                }
+
+                jsonData =  $.getJSON("js/artist.json")
+                let data = JSON.parse(jsonData)
+
+                function search_animal() {
+                let input = document.getElementById('searchbar').value
+                input = input.toLowerCase();
+                let x = document.querySelector('#list-holder');
+                x.innerHTML = ""
+
+                for (i = 0; i < data.length; i++) {
+                    let obj = data[i];
+
+                        if (obj.Name.toLowerCase().includes(input)) {
+                            const elem = document.createElement("li")
+                            elem.innerHTML = `${obj.name} - ${obj.creationDate}`
+                            x.appendChild(elem)
+                        }
+                    }
+                }
+            </script>
+
+            </nav>
+    
+        <div class="home_content">
+                        {{range .Items}}
+                        <div class="column"> 
+                        <div class="container">
+                            <div class="card">
+                                <div class="slide slide1">                 
+                                    <div class="content">                
+                                        <div class="icon">
+                                           <i aria-hidden="true"><img id="img" src={{.Imges}}></i>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div class="slide slide2">
+
+                                    <div class="content">
+                                        <h3>
+                                            <h4><b>{{.Groupes}}</b></h4>
+                                            <form class="form-inline" method="POST" action="/Artists">
+                                            <input type="hidden" href="/Artists" name="artist_page" value = "{{.ID}}"></a>
+                                            <input type="submit" class="btn btn-light" value="More">
+                                            </form>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>   
+                        </div>
+                        </div>
+                        {{end}}
+</body>
+<footer>
+    
+</footer>
+</html>
