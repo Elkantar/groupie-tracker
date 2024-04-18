@@ -11,4 +11,4 @@ This groupie tracker permit to see informaition about a band or an artist.
     And the last one, relation, does the link between all the other parts, artists, dates and locations.
 
 # -Authors
-Dustman & Elkantar
+@Dustman7 & @Elkantar
